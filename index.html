@@ -2,21 +2,20 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Production-grade libraries -->
+    <!-- Mind AR source libraries -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     
     <style>
       body { margin: 0; overflow: hidden; background-color: #111; font-family: -apple-system, sans-serif; }
       
-      /* Overlay to manage browser permissions cleanly */
       #overlay {
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
         background: #1a1a1a; display: flex; flex-direction: column;
         align-items: center; justify-content: center; z-index: 9999; color: white; padding: 20px; text-align: center;
       }
       button {
-        background: #007bff; color: white; border: none; padding: 14px 28px;
+        background: #C67846; color: black; border: none; padding: 14px 28px;
         font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px;
         box-shadow: 0 4px 15px rgba(0,123,255,0.4);
       }
@@ -72,7 +71,7 @@
         
         // Safety timeout check for privacy engines like DuckDuckGo
         const safetyTimeout = setTimeout(() => {
-          statusText.innerHTML = "⚠️ <strong>Browser Blocked Camera</strong><br><br>Privacy-focused browsers block WebAR. Please open this link using <strong>Safari (iPhone)</strong> or <strong>Chrome (Android)</strong>.";
+          statusText.innerHTML = "<strong>Browser Blocked Camera</strong><br><br>Privacy-focused browsers block WebAR. Please open this link using <strong>Safari (iPhone)</strong> or <strong>Chrome (Android)</strong>.";
         }, 4000);
 
         sceneEl.addEventListener('renderstart', () => {
