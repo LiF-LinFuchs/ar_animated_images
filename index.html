@@ -2,39 +2,17 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Loads the Augmented Reality & 3D libraries -->
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <!-- 1. Point this to your compiled .mind file -->
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      
-      <a-assets>
-        <!-- 2. Paste your free direct Video URL here -->
-        <video id="postcard-video" src="https://giphy.com/gifs/nobodiestv-tv-land-tvland-xUA7aZhmzXeCXq80Hm" preload="auto" loop="true" crossorigin="anonymous" playsinline webkit-playsinline></video>
-      </a-assets>
-
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-      <!-- 3. This tells the code what to do when the postcard is found (targetIndex 0) -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Renders the video perfectly flat over the postcard image -->
-        <a-video src="#postcard-video" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-video>
+        <!-- Temporary Blue Test Box to see if tracking works -->
+        <a-box color="blue" position="0 0 0" scale="0.5 0.5 0.5"></a-box>
       </a-entity>
     </scene>
-
-    <!-- 4. Simple script to handle autoplay when the image enters the camera view -->
-    <script>
-      const sceneEl = document.querySelector('a-scene');
-      const videoEl = document.querySelector('#postcard-video');
-      sceneEl.addEventListener("targetFound", event => {
-        videoEl.play();
-      });
-      sceneEl.addEventListener("targetLost", event => {
-        videoEl.pause();
-      });
-    </script>
   </body>
 </html>
