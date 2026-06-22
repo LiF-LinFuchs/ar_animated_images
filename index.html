@@ -33,20 +33,29 @@
     </div>
 
     <!-- The AR Environment (auto-starts only after button click) -->
-    <a-scene 
-      mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiScanning: no;" 
-      color-space="sRGB" 
-      renderer="colorManagement: true, physicallyCorrectLights" 
-      vr-mode-ui="enabled: false" 
-      device-orientation-permission-ui="enabled: false">
-      
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-      <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Rotating Blue Test Box -->
-        <a-box color="#007bff" position="0 0 0" scale="0.4 0.4 0.4" animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"></a-box>
-      </a-entity>
-    </a-scene>
+  <a-scene 
+        mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiScanning: no;" 
+        color-space="sRGB" 
+        renderer="colorManagement: true, physicallyCorrectLights" 
+        vr-mode-ui="enabled: false" 
+        device-orientation-permission-ui="enabled: false">
+        
+        <a-assets>
+          <video id="video-card1" src="https://your-free-storage.com/animation1.mp4" preload="auto" loop="true" crossorigin="anonymous" playsinline webkit-playsinline></video>
+          <video id="video-card2" src="https://your-free-storage.com/animation2.mp4" preload="auto" loop="true" crossorigin="anonymous" playsinline webkit-playsinline></video>
+        </a-assets>
+  
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+  
+        <a-entity id="target-card1" mindar-image-target="targetIndex: 0">
+          <a-video src="#video-card1" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-video>
+        </a-entity>
+  
+        <a-entity id="target-card2" mindar-image-target="targetIndex: 1">
+          <a-video src="#video-card2" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-video>
+        </a-entity>
+  
+      </a-scene>
 
     <script>
       const startBtn = document.getElementById('start-btn');
@@ -63,7 +72,7 @@
         
         // Safety timeout check for privacy engines like DuckDuckGo
         const safetyTimeout = setTimeout(() => {
-          statusText.innerHTML = "⚠️ <strong>Browser Blocked Camera</strong><br><br>Privacy-focused browsers (like DuckDuckGo) block WebAR. Please open this link using <strong>Safari (iPhone)</strong> or <strong>Chrome (Android)</strong>.";
+          statusText.innerHTML = "⚠️ <strong>Browser Blocked Camera</strong><br><br>Privacy-focused browsers block WebAR. Please open this link using <strong>Safari (iPhone)</strong> or <strong>Chrome (Android)</strong>.";
         }, 4000);
 
         sceneEl.addEventListener('renderstart', () => {
