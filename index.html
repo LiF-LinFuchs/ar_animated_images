@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      body { margin: 0; overflow: hidden; background-color: #000; }
+      #error-msg { position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.8); padding: 10px; font-family: sans-serif; z-index: 9999; }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+
+    <div id="error-msg">Loading AR Engine... If this stays here, check your browser permissions or HTTPS link.</div>
+
+    <a-scene 
+      mindar-image="imageTargetSrc: ./targets.mind; filterMinCF:0.001; filterBeta: 0.001;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: true">
+      
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Temporary Blue Test Box to see if tracking works -->
-        <a-box color="blue" position="0 0 0" scale="0.5 0.5 0.5"></a-box>
+        <a-box color="#007bff" position="0 0 0" scale="0.4 0.4 0.4" animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-box>
       </a-entity>
-    </scene>
+    </a-scene>
+
+    <script>
+      // Hide the loading message once the scene actually starts loading
+      document.querySelector('a-scene').addEventListener('renderstart', () => {
+        document.getElementById('error-msg').style.display = 'none';
+      });
+    </script>
   </body>
 </html>
